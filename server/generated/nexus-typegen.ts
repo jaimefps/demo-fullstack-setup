@@ -44,9 +44,6 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  HelloWorld: { // root type
-    message?: string | null; // String
-  }
   Mutation: {};
   Query: {};
   Task: { // root type
@@ -69,16 +66,12 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
-  HelloWorld: { // field return type
-    message: string | null; // String
-  }
   Mutation: { // field return type
     createTask: boolean | null; // Boolean
     deleteTask: boolean | null; // Boolean
     updateTask: boolean | null; // Boolean
   }
   Query: { // field return type
-    helloWorld: NexusGenRootTypes['HelloWorld'] | null; // HelloWorld
     tasks: Array<NexusGenRootTypes['Task'] | null> | null; // [Task]
   }
   Task: { // field return type
@@ -91,16 +84,12 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
-  HelloWorld: { // field return type name
-    message: 'String'
-  }
   Mutation: { // field return type name
     createTask: 'Boolean'
     deleteTask: 'Boolean'
     updateTask: 'Boolean'
   }
   Query: { // field return type name
-    helloWorld: 'HelloWorld'
     tasks: 'Task'
   }
   Task: { // field return type name

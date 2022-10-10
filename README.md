@@ -1,24 +1,41 @@
 # Demo fullstack setup
 
-Small repo to introduce Nexus, Prisma, code-gen and full-stack type-safety.
+Small repo to introduce Nexus, Prisma, code-gen, and fullstack type-safety.
 
 ### Local development
 
-Start with local server:
+Make sure you've [installed Docker](https://docs.docker.com/get-docker/) on your machine.
+
+Start the Docker container for the database:
 
 ```
-$ cd server && yarn install && yarn db:migrate && yarn start
-
+$ docker-compose up -d
 ```
 
-Once local server is live, run client dev server on a separate terminal:
+Start the local Node server:
+
+```
+$ cd server && yarn install && yarn migrate && yarn dev
+```
+
+Once Node server is live, on a separate terminal run client dev server:
 
 ```
 $ cd client && yarn install && yarn dev
 ```
 
-Whenever you make changes to the server gql types, the client needs to resync:
+Whenever you make changes to the Node server gql schema, the client needs to resync:
 
 ```
 $ cd client && yarn codegen
+```
+
+### Stop local development
+
+Cancel all running processes started above.
+
+Then stop your Docker container:
+
+```
+$ docker-compose down
 ```

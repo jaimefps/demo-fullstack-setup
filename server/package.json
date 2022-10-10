@@ -18,10 +18,9 @@
   },
   "scripts": {
     "check:ts": "tsc --noEmit",
-    "db:seed": "prisma db seed",
-    "db:migrate": "prisma migrate dev && yarn check:ts",
-    "start": "nodemon",
-    "start:prod": "NODE_ENV=production ts-node src/index.ts"
+    "migrate": "prisma migrate dev && yarn check:ts",
+    "start:prod": "NODE_ENV=production ts-node src/index.ts",
+    "dev": "nodemon"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

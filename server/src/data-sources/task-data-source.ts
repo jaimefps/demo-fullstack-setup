@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client"
 import { Context } from "../context"
 
 type un<T> = T | undefined | null

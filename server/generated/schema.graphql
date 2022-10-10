@@ -7,10 +7,6 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
-type HelloWorld {
-  message: String
-}
-
 type Mutation {
   """Create a task item"""
   createTask(title: String!): Boolean
@@ -23,8 +19,6 @@ type Mutation {
 }
 
 type Query {
-  helloWorld: HelloWorld
-
   """Get task items"""
   tasks(complete: Boolean, id: Int): [Task]
 }
