@@ -1,0 +1,10 @@
+schema: ../server/generated/schema.graphql
+documents: "./src/**/*.gql"
+generates:
+  ./generated/graphql-codegen.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+      - add:
+          content: "/*\n  IMPORTANT: This file is auto-generated, do not edit directly!\n*/"

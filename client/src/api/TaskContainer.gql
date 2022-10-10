@@ -1,0 +1,7 @@
+query TaskContainer {
+  tasks {
+    id
+    title
+    complete
+  }
+}

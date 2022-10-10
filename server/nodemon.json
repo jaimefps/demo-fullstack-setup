@@ -1,0 +1,5 @@
+{
+    "exec": "NODE_ENV=development prisma generate && ts-node --transpile-only src/index.ts",
+    "ext": "ts,js,json",
+    "watch": "src"
+}
