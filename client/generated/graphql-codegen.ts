@@ -20,11 +20,6 @@ export type Scalars = {
   DateTime: any;
 };
 
-export type HelloWorld = {
-  __typename?: 'HelloWorld';
-  message?: Maybe<Scalars['String']>;
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
   /** Create a task item */
@@ -54,7 +49,6 @@ export type MutationUpdateTaskArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  helloWorld?: Maybe<HelloWorld>;
   /** Get task items */
   tasks?: Maybe<Array<Maybe<Task>>>;
 };

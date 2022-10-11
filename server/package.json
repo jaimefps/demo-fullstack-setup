@@ -18,8 +18,10 @@
   },
   "scripts": {
     "check:ts": "tsc --noEmit",
-    "migrate": "prisma migrate dev && yarn check:ts",
-    "start:prod": "NODE_ENV=production ts-node src/index.ts",
+    "migrate": "prisma migrate dev && prisma generate && yarn check:ts",
+    "make:codegen": "cd ../client && yarn codegen && cd ../server",
+    "make:dev-server": "ts-node --transpile-only src/index.ts",
+    "make:schema": "ts-node --transpile-only src/schema.ts",
     "dev": "nodemon"
   },
   "prisma": {
