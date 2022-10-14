@@ -5,3 +5,15 @@ query TaskContainer {
     complete
   }
 }
+
+mutation CreateTask($title: String!) {
+  createTask(title: $title)
+}
+
+mutation UpdateTask($id: Int!, $title: String, $complete: Boolean) {
+  updateTask(id: $id, title: $title, complete: $complete)
+}
+
+mutation DeleteTask($id: Int!) {
+  deleteTask(id: $id)
+}

@@ -9,5 +9,5 @@
     "moduleResolution": "Node"
   },
   "exclude": ["node_modules"],
-  "include": ["src", "generated"]
+  "include": ["src", "generated", "prisma"]
 }

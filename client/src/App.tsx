@@ -1,24 +1,78 @@
-import reactLogo from "./assets/react.svg"
-import { useTaskContainerQuery } from "../generated/graphql-codegen"
-import "./App.css"
+import {
+  useTaskContainerQuery,
+  useCreateTaskMutation,
+  useUpdateTaskMutation,
+  useDeleteTaskMutation,
+} from "../generated/graphql-codegen"
 
 function App() {
-  const { data, loading } = useTaskContainerQuery()
+  const InfoResult = useTaskContainerQuery()
+
+  const mutationConfig = {
+    onCompleted() {
+      InfoResult.refetch()
+    },
+  }
+
+  const [Create, CreateResult] = useCreateTaskMutation(mutationConfig)
+  const [Update, UpdateResult] = useUpdateTaskMutation(mutationConfig)
+  const [Delete, DeleteResult] = useDeleteTaskMutation(mutationConfig)
+
   return (
-    <div className="App">
+    <div
+      style={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 10,
+      }}
+    >
+      <button
+        onClick={() =>
+          Create({
+            variables: {
+              title: "ClientTodo",
+            },
+          })
+        }
+      >
+        Create
+      </button>
+      <button
+        onClick={() => {
+          if (InfoResult.data?.tasks?.length ?? 0 > 0) {
+            Update({
+              variables: {
+                id: InfoResult.data?.tasks?.pop()?.id ?? 0,
+                title: "ClientTodo" + Date.now(),
+              },
+            })
+          }
+        }}
+      >
+        Update
+      </button>
+      <button
+        onClick={() => {
+          if (InfoResult.data?.tasks?.length ?? 0 > 0) {
+            Delete({
+              variables: {
+                id: InfoResult.data?.tasks?.pop()?.id ?? 0,
+              },
+            })
+          }
+        }}
+      >
+        Delete
+      </button>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <code>
-          <pre>{loading ? "loading..." : JSON.stringify(data, null, 2)}</pre>
-        </code>
+        <pre>
+          {InfoResult.loading
+            ? "loading..."
+            : JSON.stringify(InfoResult.data, null, 2)}
+        </pre>
       </div>
     </div>
   )
