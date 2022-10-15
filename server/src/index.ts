@@ -18,5 +18,5 @@ const server = new ApolloServer({
 server.listen().then(({ url }) => {
   console.log(`Prisma: npx prisma studio`)
   console.log(`Apollo: https://studio.apollographql.com/sandbox/explorer`)
-  console.log(`Server: ${url}`)
+  console.log(`🟢 Server: ${url}`)
 })

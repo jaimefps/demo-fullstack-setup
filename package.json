@@ -1,15 +1,15 @@
 {
+  "license": "MIT",
   "dependencies": {
     "npm-run-all": "^4.1.5"
   },
   "scripts": {
-    "i": "yarn install --force && npm-run-all -l -p install:*",
+    "migrate": "cd server && yarn migrate && cd ..",
+    "i": "yarn install --force && run-p -l install:*",
     "install:server": "cd server && yarn install --force",
     "install:client": "cd client && yarn install --force",
-    "dev": "yarn i && yarn migrate && yarn dev-lite",
-    "migrate": "cd server && yarn migrate && cd ..",
+    "dev": "yarn i && yarn migrate && yarn run-p -l dev:*",
     "dev:server": "cd server && yarn dev",
-    "dev:client": "cd client && yarn dev",
-    "dev-lite": "npm-run-all -l -p dev:*"
+    "dev:client": "cd client && yarn dev"
   }
 }

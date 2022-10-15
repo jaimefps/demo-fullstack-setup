@@ -2,9 +2,10 @@
   "name": "client",
   "private": true,
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "codegen": "graphql-codegen",
+    "codegen": "NODE_NO_WARNINGS=1 graphql-codegen",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

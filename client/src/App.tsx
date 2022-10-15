@@ -18,56 +18,66 @@ function App() {
   const [Update, UpdateResult] = useUpdateTaskMutation(mutationConfig)
   const [Delete, DeleteResult] = useDeleteTaskMutation(mutationConfig)
 
+  const flex = {
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 10,
+  }
+
   return (
-    <div
-      style={{
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 10,
-      }}
-    >
-      <button
-        onClick={() =>
-          Create({
-            variables: {
-              title: "ClientTodo",
-            },
-          })
-        }
+    <div style={flex}>
+      <div
+        style={{
+          ...flex,
+          flexDirection: "column",
+        }}
       >
-        Create
-      </button>
-      <button
-        onClick={() => {
-          if (InfoResult.data?.tasks?.length ?? 0 > 0) {
+        <button
+          onClick={() =>
+            Create({
+              variables: {
+                title: "ClientTodo",
+              },
+            })
+          }
+        >
+          Create
+        </button>
+        <button
+          disabled={!InfoResult.data?.tasks?.length}
+          onClick={() => {
             Update({
               variables: {
                 id: InfoResult.data?.tasks?.pop()?.id ?? 0,
                 title: "ClientTodo" + Date.now(),
               },
             })
-          }
-        }}
-      >
-        Update
-      </button>
-      <button
-        onClick={() => {
-          if (InfoResult.data?.tasks?.length ?? 0 > 0) {
+          }}
+        >
+          Update
+        </button>
+        <button
+          disabled={!InfoResult.data?.tasks?.length}
+          onClick={() => {
             Delete({
               variables: {
                 id: InfoResult.data?.tasks?.pop()?.id ?? 0,
               },
             })
-          }
+          }}
+        >
+          Delete
+        </button>
+      </div>
+      <div
+        style={{
+          width: 425,
+          height: 425,
+          overflow: "scroll",
         }}
       >
-        Delete
-      </button>
-      <div>
         <pre>
           {InfoResult.loading
             ? "loading..."

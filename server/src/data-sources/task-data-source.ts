@@ -1,7 +1,5 @@
 import { Context } from "../context"
 
-type un<T> = T | undefined | null
-
 export class TaskDataSource {
   constructor(protected ctx: Context) {
     this.ctx = ctx
