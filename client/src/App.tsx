@@ -3,7 +3,12 @@ import {
   useCreateTaskMutation,
   useUpdateTaskMutation,
   useDeleteTaskMutation,
+  TaskContainerQuery,
 } from "../generated/graphql-codegen"
+
+function getIdOfLast(tasks: TaskContainerQuery["tasks"]) {
+  return tasks?.[tasks?.length - 1]?.id ?? 0
+}
 
 function App() {
   const InfoResult = useTaskContainerQuery()
@@ -50,7 +55,7 @@ function App() {
           onClick={() => {
             Update({
               variables: {
-                id: InfoResult.data?.tasks?.pop()?.id ?? 0,
+                id: getIdOfLast(InfoResult.data?.tasks),
                 title: "ClientTodo" + Date.now(),
               },
             })
@@ -63,7 +68,7 @@ function App() {
           onClick={() => {
             Delete({
               variables: {
-                id: InfoResult.data?.tasks?.pop()?.id ?? 0,
+                id: getIdOfLast(InfoResult.data?.tasks),
               },
             })
           }}
