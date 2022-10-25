@@ -6,7 +6,8 @@
     "lib": ["esnext"],
     "esModuleInterop": true,
     "target": "ESNext",
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules"],
   "include": ["src", "generated", "prisma"]

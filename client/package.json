@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "dev": "run-p -l dev:*",
+    "dev:server": "NODE_ENV=development vite",
+    "dev:schema": "yarn codegen -- --watch",
     "codegen": "NODE_NO_WARNINGS=1 graphql-codegen",
     "build": "tsc && vite build",
     "preview": "vite preview"

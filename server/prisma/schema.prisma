@@ -9,8 +9,16 @@ datasource db {
 
 model Task {
   id        Int      @id @default(autoincrement())
-  title     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   complete  Boolean  @default(false)
+  title     String
+}
+
+model Member {
+  id          Int      @id @default(autoincrement())
+  firebase_id String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  username    String
 }
