@@ -58,5 +58,5 @@ export async function dangerous_authenticateDev(req: Request) {
       uid: dangerousUid,
       email: "persona@email.com",
     },
-  }
+  } as MemberInfo
 }

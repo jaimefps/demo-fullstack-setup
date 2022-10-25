@@ -2,17 +2,22 @@ import { authenticate, dangerous_authenticateDev } from "./auth/middleware"
 import { ApolloServer, AuthenticationError } from "apollo-server"
 import { Context } from "./context"
 import { schema } from "./schema"
+
+/************************
+ * Insert env configs
+ ************************/
 require("dotenv").config()
+
+const isDev = process.env.NODE_ENV === "development"
 
 const server = new ApolloServer({
   schema,
-  cors: true,
+  cors: isDev,
   async context({ req, res }) {
     try {
-      const memberInfo =
-        process.env.NODE_ENV === "development"
-          ? ((await dangerous_authenticateDev(req)) as MemberInfo)
-          : await authenticate(req)
+      const memberInfo = isDev
+        ? await dangerous_authenticateDev(req)
+        : await authenticate(req)
 
       if (memberInfo) {
         // if (memberInfo.memberDb.blocked) {

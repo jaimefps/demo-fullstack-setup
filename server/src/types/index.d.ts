@@ -1,19 +1,5 @@
 type un<T> = T | undefined | null
 
-type MemberAuth = import("./imports").MemberAuth
-type MemberDb = import("./imports").MemberDb
-
-type MemberInfo = {
-  memberDb: MemberDb
-  memberAuth: MemberAuth
-}
-
-declare namespace Express {
-  interface RequestLocals {
-    memberAuth?: MemberAuth
-    memberDb?: MemberDb
-  }
-  export interface Request extends RequestLocals {
-    locals: RequestLocals
-  }
-}
+type MemberDb = import("@prisma/client").Member
+type MemberAuth = import("firebase-admin").auth.DecodedIdToken
+type MemberInfo = { memberDb: MemberDb; memberAuth: MemberAuth }
