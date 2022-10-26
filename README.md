@@ -1,42 +1,38 @@
 # Demo fullstack setup
 
-Small repo to introduce Nexus, Prisma, code-gen, and fullstack type-safety.
+Small repo to introduce Nexus, Prisma, code-gen, and fullstack type-safety. Includes example integration with Firebase authentication.
 
 ## Start local development
 
 Make sure you've [installed Docker](https://docs.docker.com/get-docker/) on your machine.
 
-Start the Docker container for the database:
+From the root of the project, start the Docker container for the dtb:
 
 ```
 $ docker-compose up -d
 ```
 
-From the root of the project, start all dev servers in parallel:
+From the root of the project, this command starts all dev servers in parallel:
 
 ```
 $ yarn dev
 ```
 
-You local client should be up once you see:
-
-```
-[dev:client] [dev:server]   VITE v3.1.8  ready in 721 ms
-[dev:client] [dev:server]
-[dev:client] [dev:server]   ➜  Local:   http://127.0.0.1:5173/
-```
-
-Development setup is fully functional once you see:
+Development setup is fully functional when the terminal displays:
 
 ```
 🟢 Server: http://localhost:4000/
 ```
 
+The web client can be opened at:
+
+```
+➜  Local:   http://127.0.0.1:5173/
+```
+
 ## Stop local development
 
-Cancel the running processes started above.
-
-Then stop your Docker container:
+Cancel the terminal process started above. Note you will **lose all data** in the dtb if you stop the Docker container; if you wish to do so, run the below command to stop your container.
 
 ```
 $ docker-compose down

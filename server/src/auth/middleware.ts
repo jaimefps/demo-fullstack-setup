@@ -36,10 +36,10 @@ export async function authenticate(req: Request) {
 
 export async function dangerous_authenticateDev(req: Request) {
   if (process.env.NODE_ENV !== "development") {
-    throw new Error("🔴 ERROR: dangerous_authenticateDev")
+    throw new Error("🔴 Error: dangerous_authenticateDev")
   }
 
-  console.warn("🟡 WARNING: dangerous_authenticateDev")
+  console.warn("🟡 Warning: dangerous_authenticateDev")
   const dangerousUid = process.env.DANGEROUS_FIREBASE_ID!
   const memberDb = (await prisma.member.upsert({
     where: {
