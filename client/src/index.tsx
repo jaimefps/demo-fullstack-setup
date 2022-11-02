@@ -1,14 +1,16 @@
-import React from "react"
+import { StrictMode } from "react"
 import ReactDOM from "react-dom/client"
-import { ApolloProvider } from "@apollo/client"
-import { apolloClient } from "./api/apollo-client"
-import App from "./App"
+import { AuthProvider } from "./auth"
+import { ApiProvider } from "./api"
+import { Router } from "./router"
 import "./index.css"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <ApolloProvider client={apolloClient}>
-      <App />
-    </ApolloProvider>
-  </React.StrictMode>
+  <StrictMode>
+    <AuthProvider>
+      <ApiProvider>
+        <Router />
+      </ApiProvider>
+    </AuthProvider>
+  </StrictMode>
 )
