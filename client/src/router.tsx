@@ -1,34 +1,54 @@
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
-import { useMemberAuth } from "./auth"
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useNavigate,
+} from "react-router-dom"
+import { useEffect } from "react"
+import { member, useMemberAuth } from "./auth"
+import App from "./App"
 
-const AccessRoute: FCC<React.ComponentProps<typeof Route>> = (props) => {
-  const memberAuth = useMemberAuth()
-  return (
-    <Route
-      {...props}
-      component={memberAuth ? () => <Redirect to="/inside" /> : props.component}
-    />
-  )
+const Enforce: FCC<{
+  type: "login" | "entry"
+}> = ({ children, type }) => {
+  const navigate = useNavigate()
+  const { member } = useMemberAuth()
+
+  useEffect(() => {
+    if (type === "login" && !member) {
+      navigate("/", {
+        replace: true,
+      })
+    }
+
+    if (type === "entry" && member) {
+      navigate("/main", {
+        replace: true,
+      })
+    }
+  }, [member])
+
+  return children
 }
 
-const AuthRoute: FCC<React.ComponentProps<typeof Route>> = (props) => {
-  const memberAuth = useMemberAuth()
-  return (
-    <Route
-      {...props}
-      component={memberAuth ? props.component : () => <Redirect to="/" />}
-    />
-  )
-}
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <Enforce type="entry">
+        <button onClick={member.dev}>log in</button>
+      </Enforce>
+    ),
+    errorElement: <div>No Match</div>,
+  },
+  {
+    path: "/main",
+    element: (
+      <Enforce type="login">
+        <button onClick={member.logout}>log out</button>
+        <App />
+      </Enforce>
+    ),
+  },
+])
 
-export const Router = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <AccessRoute exact path="/" component={() => <div>1</div>} />
-        <AuthRoute path="/inside" component={() => <div>inside</div>} />
-        <Route component={() => <div>NoMatch</div>} />
-      </Switch>
-    </BrowserRouter>
-  )
-}
+export const Router = () => <RouterProvider router={router} />

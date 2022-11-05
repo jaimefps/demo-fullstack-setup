@@ -24,7 +24,6 @@ function App() {
   const [Delete, DeleteResult] = useDeleteTaskMutation(mutationConfig)
 
   const flex = {
-    height: "100%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -32,7 +31,12 @@ function App() {
   }
 
   return (
-    <div style={flex}>
+    <div
+      style={{
+        ...flex,
+        marginTop: "10%",
+      }}
+    >
       <div
         style={{
           ...flex,
@@ -48,7 +52,7 @@ function App() {
             })
           }
         >
-          Create
+          Add one
         </button>
         <button
           disabled={!InfoResult.data?.tasks?.length}
@@ -61,7 +65,7 @@ function App() {
             })
           }}
         >
-          Update
+          Update last
         </button>
         <button
           disabled={!InfoResult.data?.tasks?.length}
@@ -73,7 +77,7 @@ function App() {
             })
           }}
         >
-          Delete
+          Delete last
         </button>
       </div>
       <div

@@ -1,6 +1,9 @@
+import { secrets } from "../secrets"
+
 export function config() {
   return {
-    firebaseCreds: {
+    secrets: secrets(),
+    firebase: {
       apiKey: "AIzaSyDDKGjQw_TDJefWpU8kFJzoK1vDY1JAd84",
       authDomain: "events-prospect-dev.firebaseapp.com",
       projectId: "events-prospect-dev",

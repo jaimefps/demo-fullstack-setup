@@ -9,8 +9,8 @@ import {
   getAuth,
 } from "firebase/auth"
 
-const { firebaseCreds } = config()
-const firebaseApp = initializeApp(firebaseCreds)
+const { firebase, secrets } = config()
+const firebaseApp = initializeApp(firebase)
 export const auth = getAuth(firebaseApp)
 
 export const member = {
@@ -25,6 +25,13 @@ export const member = {
   },
   login(email: string, password: string) {
     return signInWithEmailAndPassword(auth, email, password)
+  },
+  dev() {
+    return signInWithEmailAndPassword(
+      auth,
+      secrets.dev.email,
+      secrets.dev.password
+    )
   },
   logout() {
     return signOut(auth)
